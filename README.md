@@ -1,9 +1,10 @@
-🌱 Verdin · Controle Financeiro Pessoal
+# 🌱 Verdin · Controle Financeiro Pessoal
 
 Um aplicativo de controle financeiro mensal simples, visual e direto ao ponto. Totalmente construído em HTML, CSS e JavaScript puro (sem necessidade de backend ou instalação), rodando 100% no navegador. 
 
 A grande diferencial do Verdin é a sincronização na nuvem via GitHub API: você pode salvar e carregar seus dados financeiros direto em um repositório privado do GitHub, funcionando como um "banco de dados" gratuito e seguro.
 
+Você também pode acessá-lo através do link https://luca-vieira.github.io/Verdin/
 Verdin Screenshot 
 ✨ Funcionalidades
 
