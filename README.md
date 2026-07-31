@@ -47,52 +47,71 @@ Como é um arquivo único, você pode simplesmente baixar o index.html e abri-lo
     Pronto! O app já está funcionando e salvando dados localmente.
 
 (Opcional): Se quiser rodar com um servidor local (para evitar bloqueios de CORS em alguns navegadores):
-bash
- 
-  
- 
+bash 
  
 # Usando Python
 python -m http.server 8000
 # Acesse http://localhost:8000
  
  
-☁️ Configurando a Sincronização com GitHub
+Aqui está um tutorial formatado em Markdown, perfeito para você copiar e colar diretamente no seu arquivo `README.md` do repositório. Ele explica de forma clara e visual como configurar a sincronização na nuvem usando o Fine-grained token.
 
-Para que seus dados fiquem salvos na nuvem e você possa acessá-los de qualquer dispositivo, o Verdin usa a API do GitHub para salvar um arquivo .json no seu repositório.
+***
 
-Siga os passos abaixo para configurar:
-1. Crie um repositório no GitHub
+## ☁️ Configurando a Sincronização na Nuvem (GitHub)
 
-     Vá em New Repository.
-     Dê um nome (ex: meu-backup-financeiro).
-     Importante: Marque como Private (Privado) para que ninguém além de você tenha acesso aos seus dados.
-     Clique em Create repository.
+O Verdin permite que você salve e carregue seus dados financeiros direto em um repositório do GitHub, funcionando como um "banco de dados" gratuito e seguro. Isso permite que você acesse seus dados de qualquer dispositivo (celular, PC, tablet) sem precisar de um backend复杂o.
 
-2. Gere um Personal Access Token (PAT)
+Para garantir a máxima segurança, utilizamos os **Fine-grained personal access tokens** do GitHub. Com eles, o acesso do aplicativo fica restrito **apenas ao repositório que você escolher**, sem expor o resto da sua conta.
 
-     No GitHub, clique na sua foto de perfil (canto superior direito) > Settings.
-     Role até o final no menu lateral esquerdo e clique em Developer settings.
-     Vá em Personal access tokens > Tokens (classic).
-     Clique em Generate new token (classic).
-     Dê um nome (ex: Token Verdin App).
-     Em Select scopes, marque apenas a opção repo (isso concede permissão de leitura/escrita em repositórios).
-     Clique em Generate token e copie o código gerado (começa com ghp_...). Ele não será mostrado novamente.
+Siga o passo a passo abaixo para configurar:
 
-3. Configure no App Verdin
+### 1. Crie um repositório para guardar seus dados
+Se você ainda não tem um repositório para isso, crie um novo:
+1. Vá em [New Repository](https://github.com/new) no GitHub.
+2. Dê um nome (ex: `meu-backup-financeiro` ou use o próprio repositório do app).
+3. **Importante:** Marque como **Private** (Privado) para que ninguém além de você tenha acesso aos seus dados.
+4. Clique em *Create repository*.
 
-     Abra o Verdin e clique no botão "Nuvem" na barra superior.
-     Preencha os campos:
-         Usuário: Seu nome de usuário do GitHub (ex: joaosilva).
-         Repositório: O nome do repositório que você criou (ex: meu-backup-financeiro).
-         Caminho do Arquivo: O nome do arquivo que será salvo (ex: dados.json ou backups/verdin.json).
-         Token: Cole o token gerado no passo anterior.
-     Clique em Salvar na Nuvem para fazer o primeiro upload dos seus dados atuais.
+### 2. Gere o Fine-grained Personal Access Token
+Este token será a "chave" que o app usará para salvar o arquivo `.json` no seu repositório.
 
-Pronto! Agora, sempre que fizer alterações em um dispositivo, clique em "Salvar na Nuvem". Ao abrir o app no celular ou em outro PC, clique em "Baixar" para sincronizar.
+1. No GitHub, clique na sua foto de perfil (canto superior direito) > **Settings**.
+2. No menu lateral esquerdo, role até o final e clique em **Developer settings**.
+3. Vá em **Personal access tokens** > **Fine-grained tokens**.
+4. Clique no botão **Generate new token**.
+5. Preencha as informações:
+   - **Token name:** Dê um nome (ex: `Token Verdin App`).
+   - **Expiration:** Escolha por quanto tempo a chave vale (recomendado: 1 ano).
+   - **Resource owner:** Selecione o seu próprio usuário.
+   - **Repository access:** Selecione **Only select repositories** e, na lista suspensa, escolha o repositório que você criou no Passo 1.
+6. Configure as Permissões:
+   - Desça a página até a seção **Repository permissions**.
+   - Procure pela opção **Contents**.
+   - Mude a permissão de *No access* para **Read and write** (Ler e escrever).
+7. Clique em **Generate token** no final da página.
+8. **Copie o código gerado** (ele começa com `github_pat_...`). 
+   > ⚠️ *Atenção: Você não poderá ver esse código novamente. Se perder, terá que gerar um novo.*
 
-(Nota: O token e as configurações ficam salvos apenas no localStorage do navegador onde você configurou. Você precisará repetir o passo 3 em cada navegador/dispositivo que for usar).
-📂 Estrutura do Projeto
+### 3. Configure no Aplicativo Verdin
+Agora vamos conectar o app ao seu repositório.
+
+1. Abra o Verdin no seu navegador.
+2. Clique no botão **"Nuvem"** localizado na barra superior.
+3. Preencha os campos do modal com as suas informações do GitHub:
+   - **Usuário / Organização:** Seu nome de usuário (ex: `luca-vieira`).
+   - **Repositório:** O nome do repo (ex: `Verdin` ou `meu-backup-financeiro`).
+   - **Caminho do Arquivo:** O nome do arquivo que será salvo (ex: `dados.json` ou `backups/verdin.json`).
+   - **Fine-grained Token:** Cole o token copiado no Passo 2.
+4. Clique em **Salvar na Nuvem** para fazer o primeiro upload dos seus dados atuais.
+
+Pronto! 🎉 Seu arquivo JSON foi commitado no seu repositório.
+
+### 4. Como usar no dia a dia
+- **No computador A:** Você adicionou novas despesas e quer ir para o celular. Abra o app, clique em **Nuvem** > **Salvar na Nuvem**.
+- **No celular B:** Abra o app, clique em **Nuvem**. Preencha as mesmas configurações (se for a primeira vez no dispositivo) e clique em **Baixar**. Seus dados locais serão substituídos pelos dados da nuvem.
+
+> 💡 **Dica:** O aplicativo salva suas configurações de nuvem no `localStorage` do navegador. Ou seja, você só precisa preencher esses dados de token uma vez por dispositivo/navegador.
 
 O projeto é propositalmente contained em um único arquivo para facilitar o transporte e a hospedagem:
 
