@@ -56,7 +56,7 @@ Aqui está um tutorial formatado em Markdown, perfeito para você copiar e colar
 
 ## ☁️ Configurando a Sincronização na Nuvem (GitHub)
 
-O Verdin permite que você salve e carregue seus dados financeiros direto em um repositório do GitHub, funcionando como um "banco de dados" gratuito e seguro. Isso permite que você acesse seus dados de qualquer dispositivo (celular, PC, tablet) sem precisar de um backend复杂o.
+O Verdin permite que você salve e carregue seus dados financeiros direto em um repositório do GitHub, funcionando como um "banco de dados" gratuito e seguro. Isso permite que você acesse seus dados de qualquer dispositivo (celular, PC, tablet) sem precisar de um backend.
 
 Para garantir a máxima segurança, utilizamos os **Fine-grained personal access tokens** do GitHub. Com eles, o acesso do aplicativo fica restrito **apenas ao repositório que você escolher**, sem expor o resto da sua conta.
 
