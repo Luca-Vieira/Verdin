@@ -1722,46 +1722,6 @@ document.getElementById('cloudModal').addEventListener('click', e=>{ if(e.target
 document.getElementById('confirmModal').addEventListener('click', e=>{ if(e.target.id==='confirmModal') closeConfirm(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModal(); closeIO(); closeConfirm(); closeCloudModal(); } });
 
-function seedDemo(){
-  if(localStorage.getItem(STORAGE_KEY)) return;
-  const hoje = new Date();
-  const ym = hoje.toISOString().slice(0,7);
-  const dia = (d)=>`${ym}-${String(d).padStart(2,'0')}`;
-  state.receitas = [
-    {id:uid(), descricao:'Salário', valor:5200, categoria:'salario', data:dia(5), recebido:true, fixa:true, frequencia:'mensal'},
-    {id:uid(), descricao:'Freelance design', valor:1200, categoria:'freelance', data:dia(12), recebido:true, fixa:false},
-    {id:uid(), descricao:'Dividendos', valor:280, categoria:'invest', data:dia(15), recebido:false, fixa:false}
-  ];
-  state.receitas.push({id:uid(), descricao:'Salário', valor:5200, categoria:'salario', data:dia(5), recebido:true, fixa:false, fixaId:state.receitas[0].id, frequencia:'mensal'});
-  state.despesas = [
-    {id:uid(), descricao:'Aluguel', valor:1500, categoria:'moradia', data:dia(10), vencimento:dia(10), pago:true, fixa:true, frequencia:'mensal', receitaId:null, parcelas:0, parcelaAtual:0},
-    {id:uid(), descricao:'Internet', valor:99, categoria:'servicos', data:dia(8), vencimento:dia(8), pago:true, fixa:true, frequencia:'mensal', parcelas:0, parcelaAtual:0},
-    {id:uid(), descricao:'Academia', valor:120, categoria:'saude', data:dia(7), vencimento:dia(7), pago:true, fixa:true, frequencia:'mensal', parcelas:0, parcelaAtual:0},
-    {id:uid(), descricao:'TV Nova', valor:200, categoria:'lazer', data:dia(1), vencimento:dia(1), pago:false, fixa:true, frequencia:'mensal', parcelas:10, parcelaAtual:3},
-    {id:uid(), descricao:'Mercado', valor:680, categoria:'alimentacao', data:dia(hoje.getDate()), vencimento:dia(hoje.getDate()), pago:false, fixa:false},
-    {id:uid(), descricao:'Netflix', valor:55, categoria:'lazer', data:dia(20), vencimento:dia(20), pago:false, fixa:false},
-    {id:uid(), descricao:'Luz', valor:180, categoria:'moradia', data:dia(25), vencimento:dia(25), pago:false, fixa:false}
-  ];
-  state.despesas.push({id:uid(), descricao:'Aluguel', valor:1500, categoria:'moradia', data:dia(10), vencimento:dia(10), pago:true, fixa:false, fixaId:state.despesas[0].id});
-  state.metas = [
-    {id:uid(), nome:'Reserva de emergência', tipo:'reserva', meta:15000, valor:8200},
-    {id:uid(), nome:'Viagem Europa', tipo:'viagem', meta:20000, valor:5400},
-    {id:uid(), nome:'Curso inglês', tipo:'meta', meta:2400, valor:1800}
-  ];
-  state.guardados = [
-    {id:uid(), valor:2000, data:`${ym}-05`, metaId: state.metas[0].id},
-    {id:uid(), valor:1500, data:`${ym}-12`, metaId: state.metas[0].id},
-    {id:uid(), valor:1000, data:`${ym}-18`, metaId: state.metas[1].id},
-    {id:uid(), valor:800, data:`${ym}-22`, metaId: state.metas[2].id}
-  ];
-  const ymAnt = new Date(hoje.getFullYear(), hoje.getMonth()-1, 1).toISOString().slice(0,7);
-  state.guardados.push({id:uid(), valor:1500, data:`${ymAnt}-10`, metaId: state.metas[0].id}, {id:uid(), valor:1200, data:`${ymAnt}-20`, metaId: state.metas[1].id});
-  state.receitas.push({id:uid(), descricao:'Salário', valor:5200, categoria:'salario', data:`${ymAnt}-05`, recebido:true, fixa:false}, {id:uid(), descricao:'Freelance', valor:900, categoria:'freelance', data:`${ymAnt}-15`, recebido:true, fixa:false});
-  state.despesas.push({id:uid(), descricao:'Aluguel', valor:1500, categoria:'moradia', data:`${ymAnt}-10`, vencimento:`${ymAnt}-10`, pago:true, fixa:false}, {id:uid(), descricao:'Mercado', valor:620, categoria:'alimentacao', data:`${ymAnt}-15`, vencimento:`${ymAnt}-15`, pago:true, fixa:false}, {id:uid(), descricao:'Internet', valor:99, categoria:'servicos', data:`${ymAnt}-08`, vencimento:`${ymAnt}-08`, pago:true, fixa:false});
-  saveState();
-}
-
-seedDemo();
 loadState();
 updateSyncStatus();
 nav('resumo');
