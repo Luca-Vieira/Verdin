@@ -36,12 +36,8 @@ Como é um arquivo único, você pode simplesmente baixar o index.html e abri-lo
 
     Entre na pasta:
     bash
-     
-      
-     
-     
-    cd SEU_REPOSITORIO
-     
+ 
+    cd SEU_REPOSITORIO     
      
     Abra o arquivo index.html no seu navegador (Google Chrome, Firefox, Edge, etc).
     Pronto! O app já está funcionando e salvando dados localmente.
